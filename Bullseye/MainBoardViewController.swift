@@ -65,15 +65,13 @@ class MainBoardViewController: UIViewController {
             print("You choose number\(sliderValueInt)")
         }
         gameround +=  1
-        round.text = "Раунд" + String(gameround)
+        round.text = "Раунд " + String(gameround)
         updateGuessingNumber()
         if gameround == 11{
             setUp()
                
         }
-        gameround += 1
-        round.text = "Раунд " + String(gameround)
-        updateGuessingNumber()
+        
     }
     @IBAction func didTapTryAgainButton(_ sender: Any) {
         print("Try Again")
