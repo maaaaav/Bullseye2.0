@@ -46,12 +46,13 @@ class MainBoardViewController: UIViewController {
     
     @IBAction func didThumbSelectButton(_ sender: Any) {
         
+    
         // 1. Забрать число у слайдера
         let sliderValue: Float = slider.value
-        
+
         //2. Перевести это число в Int(sliderValueInt), чтобы можно было сравнить два  целых числа
         let sliderValueInt: Int  = Int(slider.value)
-        
+
         //3.Сравнить два числа, и если они совпадают, то начислить 1 очко игроку, иначе ничего не делать
         let isValuesEquals = sliderValueInt == guessingNumber
         if isValuesEquals {
@@ -61,18 +62,19 @@ class MainBoardViewController: UIViewController {
             scoreLabel.text = " Очки:" + String(score)
             print ("You guess the number")
         }else {
-        
+
             print("You choose number\(sliderValueInt)")
         }
         gameround +=  1
         round.text = "Раунд " + String(gameround)
         updateGuessingNumber()
         if gameround == 11{
-            setUp()
-               
+            round.text = "Раунд 10"
+            showResults()
+
         }
-        
-    }
+//
+   }
     @IBAction func didTapTryAgainButton(_ sender: Any) {
         print("Try Again")
         setUp()
@@ -94,5 +96,20 @@ class MainBoardViewController: UIViewController {
     func updateGuessingNumber(){
         guessingNumber = Int.random(in:1...100)
         taskLabel.text = "Попробуйте угадать число: " + String( guessingNumber )
+    }
+    func showResults() {
+        //Создали алерт
+        let alert: UIAlertController = UIAlertController (title:" Итоги игры",message:" Вы заработали\(score)очков", preferredStyle: .alert)
+        //Создали кнопку
+        let okButton: UIAlertAction = UIAlertAction(title:"Начать сначала" , style: .default, handler: { _ in
+            //Действия рпи нажатия на кнопку
+            print ("На меня нажали")
+            self.setUp()
+        })
+        
+        //Добавили кнопку
+        alert.addAction(okButton)
+        //Добавить кнопку в алерт
+        present ( alert, animated: true)
     }
 }
